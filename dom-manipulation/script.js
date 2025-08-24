@@ -371,4 +371,9 @@ async function fetchQuotesFromServer() {
 
   return stats;
 }
+/* ---------- syncQuotes wrapper ---------- */
+async function syncQuotes() {
+  return await syncWithServer();
+}
+
 });
