@@ -375,5 +375,18 @@ async function fetchQuotesFromServer() {
 async function syncQuotes() {
   return await syncWithServer();
 }
+async function syncWithServer() {
+  toast("Sync started…");
+  const srv = await fetchServerQuotes();
+  const mergeStats = mergeServerQuotes(srv);
+  const pushStats = await pushLocalChanges();
+  setLastSync(String(Date.now()));
+  
+  // Always show a clear sync message
+  toast("Quotes synced with server!", "success");
 
+  // Refresh UI
+  populateCategories();
+  filterQuotes();
+}
 });
