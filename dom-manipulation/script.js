@@ -357,4 +357,18 @@ document.addEventListener("DOMContentLoaded", () => {
   else showRandomQuote();
   syncWithServer();
   startAutoSync(30000);
+  /* ---------- Fetch Quotes from Server (wrapper) ---------- */
+async function fetchQuotesFromServer() {
+  // Fetch quotes from the mock server
+  const serverQuotes = await fetchServerQuotes();
+
+  // Merge into local quotes
+  const stats = mergeServerQuotes(serverQuotes);
+
+  // Refresh UI
+  populateCategories();
+  filterQuotes();
+
+  return stats;
+}
 });
